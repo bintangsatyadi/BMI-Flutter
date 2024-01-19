@@ -62,7 +62,8 @@ class _KonversiBMIState extends State<KonversiBMI> {
                   padding: EdgeInsets.all(16),
                   primary: Colors.blue,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25), // Updated to have a radius of 25
+                    borderRadius: BorderRadius.circular(
+                        25), // Updated to have a radius of 25
                   ),
                 ),
                 child: Text(
@@ -79,7 +80,8 @@ class _KonversiBMIState extends State<KonversiBMI> {
                   padding: EdgeInsets.all(16),
                   primary: Colors.red,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25), // Updated to have a radius of 25
+                    borderRadius: BorderRadius.circular(
+                        25), // Updated to have a radius of 25
                   ),
                 ),
                 icon: Icon(Icons.refresh),
@@ -87,7 +89,6 @@ class _KonversiBMIState extends State<KonversiBMI> {
                   'Reset BMI',
                   style: TextStyle(fontSize: 18),
                 ),
-
               ),
               SizedBox(height: 16),
               Text(
@@ -111,7 +112,8 @@ class _KonversiBMIState extends State<KonversiBMI> {
         labelText: label,
         hintText: "Input $label",
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25), // Updated to have a radius of 30
+          borderRadius:
+              BorderRadius.circular(25), // Updated to have a radius of 30
         ),
       ),
     );
@@ -163,9 +165,9 @@ class _KonversiBMIState extends State<KonversiBMI> {
           isLoading
               ? CircularProgressIndicator()
               : Text(
-            result,
-            style: TextStyle(fontSize: 16),
-          ),
+                  result,
+                  style: TextStyle(fontSize: 16),
+                ),
         ],
       ),
     );
@@ -182,11 +184,29 @@ class _KonversiBMIState extends State<KonversiBMI> {
     double weight = double.parse(weightController.text);
     String name = nameController.text;
     String age = ageController.text;
-    double a = height/100.roundToDouble();
+    double a = height / 100.roundToDouble();
+
+    // double bmi = (gender == 'Male')
+    //     ? weight / ((height/ 100) * (height / 100)/0.0001)
+    //     : weight / ((height/ 100) * (height/ 100)) * 0.9;
+
+    // String resultText = '';
+    // if (bmi < 18.5) {
+    //   resultText = 'Underweight (Kekurangan Berat Badan)';
+    // } else if (bmi >= 18.5 && bmi < 24.9) {
+    //   resultText = 'Normal weight (Ideal)';
+    // } else if (bmi >= 25 && bmi < 29.9) {
+    //   resultText = 'Overweight (Kelebihan Berat Badan)';
+    // } else {
+    //   resultText = 'Obese (Obesitas)';
+    // }
+
+    double heightInMeter =
+        height / 100.0; // Mengubah tinggi dari sentimeter ke meter
 
     double bmi = (gender == 'Male')
-        ? weight / ((height/ 100) * (height / 100)/0.0001)
-        : weight / ((height/ 100) * (height/ 100)) * 0.9;
+        ? weight / (heightInMeter * heightInMeter / 0.0001)
+        : weight / (heightInMeter * heightInMeter) * 0.9;
 
     String resultText = '';
     if (bmi < 18.5) {
@@ -200,7 +220,8 @@ class _KonversiBMIState extends State<KonversiBMI> {
     }
 
     setState(() {
-      result = 'Name: $name\nAge: $age\nBMI: ${bmi.toStringAsFixed(2)}\nStatus: $resultText';
+      result =
+          'Name: $name\nAge: $age\nBMI: ${bmi.toStringAsFixed(2)}\nStatus: $resultText';
       isLoading = false;
     });
   }
