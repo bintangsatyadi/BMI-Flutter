@@ -28,14 +28,9 @@ class _KonversiBMIState extends State<KonversiBMI> {
           style: TextStyle(color: Colors.white),
         ),
         elevation: 0.0,
-        backgroundColor: Colors.blue[700],
+        backgroundColor: Colors.purple,
         actions: [
-          Switch(
-            value: Provider.of<ThemeProvider>(context).isDarkMode,
-            onChanged: (value) {
-              Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-            },
-          ),
+
         ],
       ),
       body: SingleChildScrollView(
@@ -48,7 +43,7 @@ class _KonversiBMIState extends State<KonversiBMI> {
               SizedBox(height: 16),
               _buildInputField("Your Age", ageController),
               SizedBox(height: 16),
-              _buildInputField("Your Height (Cm)", heightController),
+              _buildInputField("Your Height (Meter)", heightController),
               SizedBox(height: 16),
               _buildInputField("Your Weight (Kg)", weightController),
               SizedBox(height: 16),
@@ -60,7 +55,7 @@ class _KonversiBMIState extends State<KonversiBMI> {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(16),
-                  primary: Colors.blue,
+                  primary: Colors.deepPurple,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                         25), // Updated to have a radius of 25
@@ -78,7 +73,7 @@ class _KonversiBMIState extends State<KonversiBMI> {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.all(16),
-                  primary: Colors.red,
+                  primary: Colors.deepPurpleAccent,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                         25), // Updated to have a radius of 25
@@ -113,7 +108,7 @@ class _KonversiBMIState extends State<KonversiBMI> {
         hintText: "Input $label",
         border: OutlineInputBorder(
           borderRadius:
-              BorderRadius.circular(25), // Updated to have a radius of 30
+              BorderRadius.circular(25),
         ),
       ),
     );
@@ -178,7 +173,7 @@ class _KonversiBMIState extends State<KonversiBMI> {
       isLoading = true;
     });
 
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
 
     double height = double.parse(heightController.text);
     double weight = double.parse(weightController.text);
@@ -202,7 +197,7 @@ class _KonversiBMIState extends State<KonversiBMI> {
     // }
 
     double heightInMeter =
-        height / 100.0; // Mengubah tinggi dari sentimeter ke meter
+        height / 100.0;
 
     double bmi = (gender == 'Male')
         ? weight / (heightInMeter * heightInMeter / 0.0001)
