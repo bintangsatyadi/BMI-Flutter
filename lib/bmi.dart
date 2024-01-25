@@ -181,27 +181,9 @@ class _KonversiBMIState extends State<KonversiBMI> {
     String age = ageController.text;
     double a = height / 100.roundToDouble();
 
-    // double bmi = (gender == 'Male')
-    //     ? weight / ((height/ 100) * (height / 100)/0.0001)
-    //     : weight / ((height/ 100) * (height/ 100)) * 0.9;
-
-    // String resultText = '';
-    // if (bmi < 18.5) {
-    //   resultText = 'Underweight (Kekurangan Berat Badan)';
-    // } else if (bmi >= 18.5 && bmi < 24.9) {
-    //   resultText = 'Normal weight (Ideal)';
-    // } else if (bmi >= 25 && bmi < 29.9) {
-    //   resultText = 'Overweight (Kelebihan Berat Badan)';
-    // } else {
-    //   resultText = 'Obese (Obesitas)';
-    // }
-
-    double heightInMeter =
-        height / 100.0;
-
     double bmi = (gender == 'Male')
-        ? weight / (heightInMeter * heightInMeter / 0.0001)
-        : weight / (heightInMeter * heightInMeter) * 0.9;
+        ? weight / ((height / 100) * (height / 100) / 0.0001)
+        : weight / ((height / 100) * (height / 100)) * 0.9 / 0.000;
 
     String resultText = '';
     if (bmi < 18.5) {
@@ -213,6 +195,8 @@ class _KonversiBMIState extends State<KonversiBMI> {
     } else {
       resultText = 'Obese (Obesitas)';
     }
+
+
 
     setState(() {
       result =
